@@ -1,14 +1,32 @@
 const express = require("express");
+const ejs = require("ejs");
 const app = express();
 
 
+
+
+//template engine
+app.set("view engine", "ejs")
+
+//MIDDLEWARES
+
+//statik klasör oluşturma
+app.use(express.static('public'))
+
+
+
+
+// ROUTES
 app.get("/", (req, res) => {
-    const photo = {
-        id: 1,
-        title: "Photo title",
-        desc: "photo desc"
-    }
-    res.send(photo);
+    res.render("index");
+})
+
+app.get("/about", (req, res) => {
+    res.render("about");
+})
+
+app.get("/add", (req, res) => {
+    res.render("add");
 })
 
 
