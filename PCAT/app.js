@@ -8,12 +8,15 @@ const app = express();
 //template engine
 app.set("view engine", "ejs")
 
+
+/********************************************************************************* */
 //MIDDLEWARES
-
 //statik klasör oluşturma
-app.use(express.static('public'))
-
-
+app.use(express.static('public'));
+//formdan gönderilen verilerin okunabilmesi işlemi
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+/********************************************************************************* */
 
 
 // ROUTES
@@ -27,6 +30,11 @@ app.get("/about", (req, res) => {
 
 app.get("/add", (req, res) => {
     res.render("add");
+})
+
+app.post("/photos", (req, res) => {
+    console.log(req.body);
+    res.redirect("/");
 })
 
 
