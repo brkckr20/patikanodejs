@@ -1,6 +1,15 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const ejs = require("ejs");
 const app = express();
+
+
+
+// db connect
+mongoose.connect("mongodb://localhost:27017/pcat-db");
+
+//MODELS IMPORT
+const Photo = require("./models/Photo.js");
 
 
 
@@ -20,8 +29,11 @@ app.use(express.json());
 
 
 // ROUTES
-app.get("/", (req, res) => {
-    res.render("index");
+app.get("/", async (req, res) => {
+    const photos = await Photo.find({});
+    res.render("index", {
+        photos: photos
+    });
 })
 
 app.get("/about", (req, res) => {
@@ -32,8 +44,8 @@ app.get("/add", (req, res) => {
     res.render("add");
 })
 
-app.post("/photos", (req, res) => {
-    console.log(req.body);
+app.post("/photos", async (req, res) => {
+    await Photo.create(req.body);
     res.redirect("/");
 })
 
