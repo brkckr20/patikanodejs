@@ -21,6 +21,15 @@
                   <%= post.createdAt %>
                 </span>
               </div>
+              <div class="buttons mb-3 d-flex justify-content-between">
+                <a href="/edit_post/<%= post._id %>" class="btn btn-primary">
+                  Update
+                </a>
+                <a href="/posts/<%= post._id %>?_method=DELETE" onclick="return confirm('Silinecek! Emin minisiniz ?')"
+                  class="btn btn-danger">
+                  Delete
+                </a>
+              </div>
             </div>
           </div>
         </div>
