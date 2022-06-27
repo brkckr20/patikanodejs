@@ -3,10 +3,29 @@ const fs = require("fs");
 
 
 exports.getAllPhotos = async (req, res) => {
+    /* console.log(req.query);
     const photos = await Photo.find({}).sort('-createdAt');
     res.render("index", {
         photos: photos
+    }); */
+
+
+    // with pagination
+    const page = req.query.page || 1;
+    //sayfada kaç foto gösterilecek
+    const photosPerPage = 3;
+    //toplam foto sayısı
+    const totalPhotos = await Photo.find().countDocuments();
+    const photos = await Photo.find({})
+        .sort('-createdAt')
+        .skip((page - 1) * photosPerPage)
+        .limit(photosPerPage);
+    res.render("index", {
+        photos: photos,
+        current: page,
+        pages: Math.ceil(totalPhotos / photosPerPage)
     });
+
 }
 
 exports.getPhoto = async (req, res) => {

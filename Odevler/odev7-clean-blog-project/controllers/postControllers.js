@@ -1,6 +1,7 @@
 const Post = require("../models/Post.js");
 
 exports.getAllPosts = async (req, res) => {
+
     const posts = await Post.find().sort("-createdAt");
     res.render("index", {
         posts
