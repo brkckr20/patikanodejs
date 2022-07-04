@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-
+const session = require('express-session')
 //routing
 
 const pageRoute = require("./routes/pageRoute.js");
@@ -15,12 +15,28 @@ mongoose.connect("mongodb://localhost:27017/smartedu").then(() => console.log("D
 //template engine
 app.set("view engine", "ejs");
 
+
+//global variable - session işlemleri için
+global.userIN = null;
+
 //middlewares
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'my_keyboard_cat',
+    resave: false,
+    saveUninitialized: true
+}));
+
+
 
 //routes
+app.use("*", (req, res, next) => { // tüm isteklerde kullan
+    userIN = req.session.userID;
+    next();
+})
 app.use("/", pageRoute);
 app.use("/courses", courseRoute);
 app.use("/categories", categoryRoute);
