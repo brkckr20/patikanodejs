@@ -19,9 +19,12 @@
                             href="/about">About Us</a></li>
                     <li class="nav-item <%= pageName === 'courses' && 'active' %> "><a class="nav-link"
                             href="/courses">Courses</a></li>
+
                     <% if (userIN) { %>
-                        <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                        <li class="nav-item <%= pageName === 'dashboard' && 'active' %> "><a class="nav-link"
+                                href="users/dashboard">Dashboard</a></li>
                         <% } %>
+
                             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -37,7 +40,7 @@
                             <% if (userIN) { %>
 
                                 <li><a class="hover-btn-new log <%= pageName === 'register' && 'orange' %>"
-                                        href="/register"><span><i class="fa fa-sign-out"
+                                        href="/users/logout"><span><i class="fa fa-sign-out"
                                                 aria-hidden="true"></i></span></a>
                                 </li>
                                 <% } %>
