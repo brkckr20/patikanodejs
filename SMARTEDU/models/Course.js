@@ -20,6 +20,10 @@ const CourseSchema = new Schema({
     category: { //kurs - kategori ilişkisi kurmak
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category"
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 
 }, { timestamps: true });
