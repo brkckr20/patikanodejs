@@ -20,12 +20,19 @@ const UserSchema = new Schema({
         type: String,
         enum: ["student", "teacher", "admin"],
         default: "student"
-    }
+    },
+    courses: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Course"
+        }
+    ]
 });
 
 //bcrypt işlemleri
 UserSchema.pre("save", function (next) {
     const user = this;
+    if (!this.isModified('password')) return next(); //kullanıcının parolasının istem dışı güncellenmesini önlemek için - öğrenci kursa kaydolduğunda parola otomatik olarak değişiyordu
     bcrypt.hash(user.password, 10, (error, hash) => {
         user.password = hash;
         next();
