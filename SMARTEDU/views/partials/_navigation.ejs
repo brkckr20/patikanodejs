@@ -25,7 +25,8 @@
                                 href="/users/dashboard">Dashboard</a></li>
                         <% } %>
 
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                            <li class="nav-item <%= pageName === 'contact' && 'active' %> "><a class="nav-link"
+                                    href="/contact">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <% if (!userIN) { %>

@@ -9,5 +9,7 @@ router.get("/", pageController.getIndexPage);
 router.get("/about", pageController.getAboutPage);
 router.get("/register", redirectMiddleware, pageController.getRegisterPage);
 router.get("/login", redirectMiddleware, pageController.getLoginPage);
+router.get("/contact", pageController.getContactPage);
+router.post("/contact", pageController.sendEmail);
 
 module.exports = router;
