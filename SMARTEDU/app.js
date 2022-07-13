@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const app = express();
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-//routing
+const flash = require('connect-flash');
 
+//routing
 const pageRoute = require("./routes/pageRoute.js");
 const courseRoute = require("./routes/courseRoute.js");
 const categoryRoute = require("./routes/categoryRoute.js");
@@ -21,7 +22,6 @@ app.set("view engine", "ejs");
 global.userIN = null;
 
 //middlewares
-
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -31,6 +31,11 @@ app.use(session({
     saveUninitialized: true,
     store: MongoStore.create({ mongoUrl: 'mongodb://localhost/smartedu' }) //session işlemlerinin veritabanında tutulması için eklendi
 }));
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.flashMessages = req.flash(); //ilgili olan templatte kullanabilmek için
+    next();
+})
 
 
 

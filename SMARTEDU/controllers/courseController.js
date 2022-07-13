@@ -14,14 +14,12 @@ exports.createCourse = async (req, res) => {
             status: "success",
             course: course
         }) */
-
+        req.flash("success", `${course.name} kursu başarıyla eklendi.`)
         res.status(201).redirect("/courses")
 
     } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            error
-        })
+        req.flash("error", `Kurs eklenirken bir hata oluştu...`)
+        res.status(400).redirect("/courses")
     }
 }
 
