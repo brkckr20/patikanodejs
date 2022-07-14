@@ -4,6 +4,7 @@ const app = express();
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
+const methodOverride = require("method-override");
 
 //routing
 const pageRoute = require("./routes/pageRoute.js");
@@ -35,7 +36,12 @@ app.use(flash());
 app.use((req, res, next) => {
     res.locals.flashMessages = req.flash(); //ilgili olan templatte kullanabilmek için
     next();
-})
+});
+app.use(
+    methodOverride('_method', {
+        methods: ['POST', 'GET'],
+    })
+);
 
 
 

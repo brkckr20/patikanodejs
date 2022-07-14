@@ -113,3 +113,15 @@ exports.relaseCourse = async (req, res) => {
         }
     }
 }
+
+exports.deleteCourse = async (req, res) => {
+    try {
+        const course = await Course.findOneAndRemove({ slug: req.params.slug });
+        req.flash("success", `${course.name} kursu başarıyla silindi.`)
+        res.redirect("/users/dashboard");
+    } catch (error) {
+        if (error) {
+            console.log(error)
+        }
+    }
+}

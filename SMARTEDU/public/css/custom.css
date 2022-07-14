@@ -1,2 +1,7 @@
-
 /** ADD YOUR AWESOME CODES HERE **/
+div.editAndDelete ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
