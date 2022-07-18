@@ -125,3 +125,19 @@ exports.deleteCourse = async (req, res) => {
         }
     }
 }
+
+exports.updateCourse = async (req, res) => {
+    try {
+        const course = await Course.findOne({ slug: req.params.slug })
+        course.name = req.body.name;
+        course.description = req.body.description;
+        course.category = req.body.category;
+        course.save();
+
+        res.redirect("/users/dashboard");
+    } catch (error) {
+        if (error) {
+            console.log(error)
+        }
+    }
+}

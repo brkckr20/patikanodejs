@@ -10,5 +10,6 @@ router.get("/:slug", courseController.getCourse);        // http://localhost:300
 router.post("/enroll", courseController.enrollCourse);
 router.post("/release", courseController.relaseCourse);
 router.delete("/:slug", courseController.deleteCourse);
+router.put("/:slug", courseController.updateCourse);
 
 module.exports = router;
